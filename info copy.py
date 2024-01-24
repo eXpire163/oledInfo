@@ -94,53 +94,52 @@ font = ImageFont.truetype('/home/expire/slkscr.ttf', 12)
 while True:
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("F    "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(2)
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str(" E   "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(2)
+    # Shell scripts for system monitoring from here :
+    # https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
+    cmd = "hostname -I | cut -d\' \' -f1 | tr -d \'\\n\'"
+    IP = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    cmd = "hostname | tr -d \'\\n\'"
+    HOST = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    cmd = "top -bn1 | grep load | awk " \
+          "'{printf \"CPU Load: %.2f\", $(NF-2)}'"
+    CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    cmd = "free -m | awk 'NR==2{printf " \
+          "\"Mem: %s/%sMB %.2f%%\", $3,$2,$3*100/$2 }'"
+    MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    cmd = "df -h | awk '$NF==\"/\"{printf " \
+          "\"Disk: %d/%dGB %s\", $3,$2,$5}'"
+    Disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("  L  "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(2)
+    # Pi Hole data!
+#    try:
+#        r = requests.get(api_url)
+#        data = json.loads(r.text)
+#        DNSQUERIES = data['dns_queries_today']
+#        ADSBLOCKED = data['ads_blocked_today']
+#        CLIENTS = data['unique_clients']
+#    except KeyError:
+#        time.sleep(1)
+#        continue
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("   I "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(2)
+   # draw.text((x, top), "IP: " + str(IP) +
+   #           " (" + HOST + ")", font=font, fill=255)
+   # draw.text((x, top + 8), "Ads Blocked: " +
+   #           str(ADSBLOCKED), font=font, fill=255)
+   # draw.text((x, top + 16), "Clients:     " +
+   #           str(CLIENTS), font=font, fill=255)
+   # draw.text((x, top + 24), "DNS Queries: " +
+   #           str(DNSQUERIES), font=font, fill=255)
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("    X"), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(2)
-
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
+    # skip over original stats
     draw.text((x, top+8),     str("FELIX"), font=font, fill=200)
+    draw.text((x, top+19),    str(CPU),  font=font, fill=255)
+   # draw.text((x, top+25),    str(Disk),  font=font, fill=255)
+
+    # Display image.
     disp.image(image)
     disp.show()
-    time.sleep(2)
-#     cmd = "top -bn1 | grep load | awk " \
-#           "'{printf \"CPU Load: %.2f\", $(NF-2)}'"
-#     CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
-
-#     # skip over original stats
-#     draw.text((x, top+8),     str("FELIX"), font=font, fill=200)
-#     draw.text((x, top+19),    str(CPU),  font=font, fill=255)
-#    # draw.text((x, top+25),    str(Disk),  font=font, fill=255)
-
-    # # Display image.
-    # disp.image(image)
-    # disp.show()
-    # time.sleep(DISPLAY_ON)
-    # disp.fill(0)
-    # disp.show()
-    # time.sleep(DISPLAY_OFF)
+    time.sleep(DISPLAY_ON)
+    disp.fill(0)
+    disp.show()
+    time.sleep(DISPLAY_OFF)
