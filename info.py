@@ -124,7 +124,7 @@ while True:
     time.sleep(speed)
 
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("     "), font=font, fill=200)
+    draw.text((x, top+8),     str("FELIX"), font=font, fill=200)
     disp.image(image)
     disp.show()
     time.sleep(speed)
