@@ -91,43 +91,46 @@ x = 0
 # Load nice silkscreen font
 font = ImageFont.truetype('/home/expire/slkscr.ttf', 18)
 speed = 0.02
-while True:
-    # Draw a black filled box to clear the image.
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("F    "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(speed)
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str(" E   "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(speed)
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("  L  "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(speed)
+# Draw a black filled box to clear the image.
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
+draw.text((x, top+8),     str("F    "), font=font, fill=200)
+disp.image(image)
+disp.show()
+time.sleep(speed)
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("   I "), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(speed)
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
+draw.text((x, top+8),     str(" E   "), font=font, fill=200)
+disp.image(image)
+disp.show()
+time.sleep(speed)
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("    X"), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(speed)
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
+draw.text((x, top+8),     str("  L  "), font=font, fill=200)
+disp.image(image)
+disp.show()
+time.sleep(speed)
 
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-    draw.text((x, top+8),     str("FELIX"), font=font, fill=200)
-    disp.image(image)
-    disp.show()
-    time.sleep(speed)
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
+draw.text((x, top+8),     str("   I "), font=font, fill=200)
+disp.image(image)
+disp.show()
+time.sleep(speed)
+
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
+draw.text((x, top+8),     str("    X"), font=font, fill=200)
+disp.image(image)
+disp.show()
+time.sleep(speed)
+
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
+draw.text((x, top+8),     str("FELIX"), font=font, fill=200)
+disp.image(image)
+disp.show()
+time.sleep(speed)
+
+
 #     cmd = "top -bn1 | grep load | awk " \
 #           "'{printf \"CPU Load: %.2f\", $(NF-2)}'"
 #     CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
