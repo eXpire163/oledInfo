@@ -99,7 +99,9 @@ def printo(text):
 
 disp = setupOLed()
 clear()
-
+printo("Starting...")
+sleep(1)
+clear()
 try:
   client = MPDClient()
   client.connect("localhost", 6600)
